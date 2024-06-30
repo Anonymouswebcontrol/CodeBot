@@ -394,4 +394,19 @@ async def set_role(ctx, member: discord.Member, role: discord.Role):
     except discord.HTTPException as e:
         await ctx.send(f"Une erreur s'est produite : {str(e)}")
         
+        @bot.event
+async def on_message(message):
+    # Ne pas répondre à ses propres messages
+    if message.author == bot.user:
+        return
+    
+    # Vérifier si le message provient d'un canal ignoré
+    if message.channel.id in ignored_channels:
+        return
+    
+    # Ajoutez ici votre logique de traitement des messages
+    await bot.process_commands(message)
+
+ignored_channels = [1251163392647892998]
+        
 bot.run(TOKEN)
