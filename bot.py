@@ -394,7 +394,7 @@ async def set_role(ctx, member: discord.Member, role: discord.Role):
     except discord.HTTPException as e:
         await ctx.send(f"Une erreur s'est produite : {str(e)}")
         
-        @bot.event
+@bot.event
 async def on_message(message):
     # Ne pas répondre à ses propres messages
     if message.author == bot.user:
