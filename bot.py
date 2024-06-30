@@ -352,6 +352,7 @@ async def restart(ctx):
     os.execv(sys.executable, ['python'] + sys.argv)
 
 @bot.command(name="role_temp")
+@commands.check(is_owner)
 async def temp_role(ctx, member: discord.Member, role: discord.Role, duration: int):
     if ctx.guild.owner_id != ctx.author.id:
         await ctx.send("Seul le propriétaire du serveur peut utiliser cette commande.")
@@ -367,6 +368,7 @@ async def temp_role(ctx, member: discord.Member, role: discord.Role, duration: i
     await ctx.send(f'{member.mention} n\'a plus le rôle {role.mention}.')
 
 @bot.command(name="role_set")
+@commands.check(is_owner)
 async def set_role(ctx, member: discord.Member, role: discord.Role):
     # Vérifier si l'auteur est le propriétaire du serveur
     if ctx.guild.owner_id != ctx.author.id:
